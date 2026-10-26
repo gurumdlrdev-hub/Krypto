@@ -154,7 +154,7 @@ http://localhost:2409
 
 ### Home Page
 
-![Home Page](https://res.cloudinary.com/ygllvtyg/image/upload/v1793043078/Screenshot_2026-10-27_005805_n46vzl.png)
+![Home Page](https://res.cloudinary.com/ygllvtyg/image/upload/v1793044603/Screenshot_2026-10-27_012643_eu9iam.png)
 
 ### Login Page
 
