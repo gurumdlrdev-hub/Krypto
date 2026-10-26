@@ -1,303 +1,230 @@
 <!DOCTYPE html>
 <html lang="ta">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krypto - Decrypt Image</title>
+    <head>
+        <title>Krypto - Image Decrypt</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Google Font: Orbitron -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+            body {
+                font-family: 'Orbitron', sans-serif;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                background-color: #0d1117;
+                background-image: url('https://res.cloudinary.com/ygllvtyg/image/upload/v1785172795/Screenshot_2026-07-27_224856_saundu.png');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                color: #00BFFF;
+            }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #030712;
-            background-image: url('https://res.cloudinary.com/ygllvtyg/image/upload/v1785172795/Screenshot_2026-07-27_224856_saundu.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #00e5ff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+            /* Top Branding Bar */
+            .top-navbar {
+                width: 100%;
+                padding: 18px 32px;
+                border-bottom: 2px solid #00BFFF;
+                box-shadow: 0 0 20px rgba(0, 191, 255, 0.45);
+                background: rgba(10, 15, 30, 0.7);
+                backdrop-filter: blur(8px);
+            }
 
-        /* Top Navbar */
-        .top-navbar {
-            width: 100%;
-            padding: 18px 36px;
-            border-bottom: 2px solid #00e5ff;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
-            background: rgba(3, 7, 18, 0.75);
-            backdrop-filter: blur(10px);
-        }
+            .logo-text {
+                font-size: 22px;
+                font-weight: 800;
+                letter-spacing: 4px;
+                text-transform: uppercase;
+                color: #00BFFF;
+                text-shadow: 0 0 12px rgba(0, 191, 255, 0.8), 0 0 24px rgba(0, 191, 255, 0.4);
+                text-decoration: none;
+            }
 
-        .logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #00e5ff;
-            text-shadow: 0 0 12px rgba(0, 229, 255, 0.8);
-            text-decoration: none;
-        }
+            /* Center Stage */
+            .page-container {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 30px 20px;
+            }
 
-        /* Layout Container */
-        .main-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-        }
+            .main {
+                width: 100%;
+                max-width: 520px;
+                display: flex;
+                flex-direction: column;
+                gap: 22px;
+            }
 
-        .cipher-box {
-            width: 100%;
-            max-width: 520px;
-            background: rgba(10, 15, 30, 0.85);
-            backdrop-filter: blur(12px);
-            border: 2px solid #00e5ff;
-            border-radius: 10px;
-            padding: 36px 30px;
-            box-shadow: 0 0 25px rgba(0, 229, 255, 0.25);
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
+            /* Form Card */
+            .upload-card {
+                background: rgba(10, 15, 30, 0.8);
+                backdrop-filter: blur(10px);
+                border: 2px solid #00BFFF;
+                border-radius: 8px;
+                padding: 28px;
+                box-shadow: 0 0 20px rgba(0, 191, 255, 0.25);
+            }
 
-        .box-header {
-            text-align: center;
-        }
+            /* Image Drop Box */
+            .drop-zone {
+                position: relative;
+                border: 2px dashed #00BFFF;
+                border-radius: 6px;
+                padding: 36px 15px;
+                text-align: center;
+                cursor: pointer;
+                transition: all 0.25s ease;
+                background: rgba(0, 191, 255, 0.03);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                overflow: hidden;
+            }
 
-        .box-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            color: #ffffff;
-            text-transform: uppercase;
-            text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
-        }
+            .drop-zone:hover {
+                border-color: #00ffff;
+                background: rgba(0, 191, 255, 0.08);
+                box-shadow: 0 0 18px rgba(0, 191, 255, 0.35);
+            }
 
-        .box-subtitle {
-            font-size: 12px;
-            letter-spacing: 1.5px;
-            color: #94a3b8;
-            margin-top: 6px;
-            text-transform: uppercase;
-        }
+            .drop-icon {
+                width: 46px;
+                height: 46px;
+                stroke: #00BFFF;
+                filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.6));
+                pointer-events: none;
+            }
 
-        /* Upload Form */
-        .upload-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+            .drop-label {
+                font-size: 13px;
+                letter-spacing: 1px;
+                pointer-events: none;
+            }
 
-        /* Pure CSS Native Drag & Drop Zone */
-        .dropzone-container {
-            position: relative;
-            width: 100%;
-            height: 180px;
-            border: 2px dashed #00e5ff;
-            border-radius: 8px;
-            background: rgba(5, 10, 20, 0.7);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            overflow: hidden;
-        }
+            .drop-subtext {
+                font-size: 10px;
+                opacity: 0.65;
+                letter-spacing: 1.5px;
+                pointer-events: none;
+            }
 
-        /* Invisible Native File Input Layer covering entire box */
-        .dropzone-container input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-            z-index: 10;
-        }
+            /* Native Drag & Drop overlay */
+            .drop-zone input[type="file"] {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                cursor: pointer;
+                z-index: 10;
+            }
 
-        /* Hover and Drag effects using CSS only */
-        .dropzone-container:hover {
-            border-color: #ffffff;
-            background: rgba(0, 229, 255, 0.12);
-            box-shadow: 0 0 25px rgba(0, 229, 255, 0.45);
-        }
+            /* Action Button */
+            .cipher-btn {
+                width: 100%;
+                font-family: 'Orbitron', sans-serif;
+                background: rgba(10, 15, 30, 0.9);
+                border: 2px solid #00BFFF;
+                border-radius: 6px;
+                padding: 14px;
+                color: #00BFFF;
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                cursor: pointer;
+                box-shadow: 0 0 14px rgba(0, 191, 255, 0.25);
+                transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+                margin-top: 18px;
+            }
 
-        .upload-icon {
-            stroke: #00e5ff;
-            filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.6));
-            pointer-events: none;
-        }
+            .cipher-btn:hover {
+                transform: translateY(-2px);
+                border-color: #00ffff;
+                color: #00ffff;
+                box-shadow: 0 0 22px rgba(0, 191, 255, 0.55), inset 0 0 10px rgba(0, 191, 255, 0.2);
+            }
 
-        .drop-label-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 13px;
-            letter-spacing: 1.5px;
-            color: #e2e8f0;
-            text-align: center;
-            pointer-events: none;
-        }
+            .cipher-btn:active {
+                transform: translateY(0);
+            }
 
-        .drop-label-text span {
-            color: #00e5ff;
-            text-decoration: underline;
-        }
+            /* Return to Portal Button Link */
+            .back-container {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
 
-        .format-hint {
-            font-size: 11px;
-            color: #94a3b8;
-            letter-spacing: 1px;
-            pointer-events: none;
-        }
+            .portal-link {
+                display: inline-block;
+                width: 100%;
+                text-align: center;
+                padding: 12px 18px;
+                background: rgba(10, 15, 30, 0.85);
+                backdrop-filter: blur(8px);
+                border: 1px solid #00BFFF;
+                border-radius: 6px;
+                color: #00BFFF;
+                text-decoration: none;
+                font-size: 12px;
+                letter-spacing: 2px;
+                box-shadow: 0 0 12px rgba(0, 191, 255, 0.25);
+                transition: all 0.2s ease;
+            }
 
-        /* Passphrase / Key Input */
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+            .portal-link:hover {
+                color: #00ffff;
+                border-color: #00ffff;
+                box-shadow: 0 0 20px rgba(0, 191, 255, 0.5), inset 0 0 8px rgba(0, 191, 255, 0.2);
+                transform: translateY(-2px);
+            }
+        </style>
+    </head>
+    <body>
+        <header class="top-navbar">
+            <a href="/" class="logo-text">KRYPTO</a>
+        </header>
 
-        .form-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            color: #00e5ff;
-            text-transform: uppercase;
-        }
-
-        .form-input {
-            width: 100%;
-            font-family: 'Inter', sans-serif;
-            background: rgba(5, 10, 20, 0.9);
-            border: 1px solid #00e5ff;
-            border-radius: 6px;
-            padding: 13px 15px;
-            color: #ffffff;
-            font-size: 14px;
-            outline: none;
-            transition: all 0.25s ease;
-        }
-
-        .form-input:focus {
-            border-color: #00ffff;
-            box-shadow: 0 0 14px rgba(0, 229, 255, 0.5);
-        }
-
-        .form-input::placeholder {
-            color: #475569;
-            font-size: 12px;
-            letter-spacing: 1px;
-        }
-
-        /* Submit Button */
-        .btn-encrypt-submit {
-            width: 100%;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 14px;
-            color: #00e5ff;
-            background: rgba(0, 229, 255, 0.1);
-            border: 2px solid #00e5ff;
-            border-radius: 6px;
-            cursor: pointer;
-            box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
-            transition: all 0.25s ease;
-            margin-top: 6px;
-        }
-
-        .btn-encrypt-submit:hover {
-            background: #00e5ff;
-            color: #030712;
-            border-color: #00ffff;
-            box-shadow: 0 0 28px rgba(0, 229, 255, 0.75);
-            transform: translateY(-2px);
-        }
-
-        .btn-encrypt-submit:active {
-            transform: translateY(0);
-        }
-
-        /* Back Link */
-        .back-nav {
-            text-align: center;
-        }
-
-        .back-nav a {
-            font-family: 'Orbitron', sans-serif;
-            color: #00e5ff;
-            text-decoration: none;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            opacity: 0.75;
-            transition: opacity 0.2s ease, text-shadow 0.2s ease;
-        }
-
-        .back-nav a:hover {
-            opacity: 1;
-            text-shadow: 0 0 8px rgba(0, 229, 255, 0.8);
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Top Navbar -->
-    <header class="top-navbar">
-        <a href="/" class="logo-text" style="text-decoration: none;">KRYPTO</a>
-    </header>
-
-    <main class="main-container">
-        <div class="cipher-box">
-            <div class="box-header">
-                <h1 class="box-title">IMAGE CIPHER</h1>
-                <div class="box-subtitle">AES-256-GCM DECRYPTION</div>
-            </div>
-
-            
-            <form action="/decrypt/image" method="POST" enctype="multipart/form-data" class="upload-form">
-                
-                <!-- Pure CSS Drag & Drop Box -->
-                <div class="dropzone-container">
-                    
-                    <input type="file" name="decrypt_image" accept=".enc,.bin,*" required>
-                    
-                    <svg class="upload-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="17 8 12 3 7 8"/>
-                        <line x1="12" y1="3" x2="12" y2="15"/>
-                    </svg>
-                    <p class="drop-label-text">DRAG &amp; DROP PNG OR <span>BROWSE</span></p>
-                    <span class="format-hint">SUPPORTED: PNG ONLY</span>
+        <div class="page-container">
+            <div class="main">
+                <div class="upload-card">
+                    <form action="/decrypt/image" method="POST" enctype="multipart/form-data">
+                        <label for="image_input" class="drop-zone">
+                            <!-- Image Icon -->
+                            <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                            <span class="drop-label">CLICK OR DRAG ENCRYPTED IMAGE HERE</span>
+                            <span class="drop-subtext">SUPPORTS: .ENC / BINARY</span>
+                            <input type="file" id="image_input" name="decrypt_image" accept=".enc,.bin,*" required>
+                        </label>
+                        <button type="submit" class="cipher-btn">Decrypt Image</button>
+                    </form>
                 </div>
 
-                <!-- Submit Button -->
-                <button type="submit" class="btn-encrypt-submit">START DECRYPTION</button>
-            </form>
-
-            <div class="back-container">
-                <a href="/decrypt" class="portal-link">&lt; BACK TO DECRYPT MODULES</a>
+                <!-- Highly Visible Return Button -->
+                <div class="back-container">
+                    <a href="/decrypt" class="portal-link">&lt; BACK TO DECRYPT MODULES</a>
+                </div>
             </div>
         </div>
-    </main>
-
-</body>
+    </body>
 </html>
