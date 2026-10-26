@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krypto - User Login</title>
+
+    <!-- Google Font: Orbitron & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712;
+            background-image: url('https://res.cloudinary.com/ygllvtyg/image/upload/v1785172795/Screenshot_2026-07-27_224856_saundu.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #00e5ff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Navbar */
+        .top-navbar {
+            width: 100%;
+            padding: 18px 36px;
+            border-bottom: 2px solid #00e5ff;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+            background: rgba(3, 7, 18, 0.75);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #00e5ff;
+            text-shadow: 0 0 12px rgba(0, 229, 255, 0.8);
+            text-decoration: none;
+        }
+
+        /* Center Layout */
+        .auth-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 440px;
+            background: rgba(10, 15, 30, 0.85);
+            backdrop-filter: blur(12px);
+            border: 2px solid #00e5ff;
+            border-radius: 10px;
+            padding: 36px 30px;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.25);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .auth-header {
+            text-align: center;
+        }
+
+        .auth-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+        }
+
+        .auth-subtitle {
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            color: #94a3b8;
+            margin-top: 6px;
+            text-transform: uppercase;
+        }
+
+        /* Form Controls */
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: #00e5ff;
+            text-transform: uppercase;
+        }
+
+        .form-input {
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            background: rgba(5, 10, 20, 0.9);
+            border: 1px solid #00e5ff;
+            border-radius: 6px;
+            padding: 13px 15px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .form-input:focus {
+            border-color: #00ffff;
+            box-shadow: 0 0 14px rgba(0, 229, 255, 0.5);
+        }
+
+        .form-input::placeholder {
+            color: #475569;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* Themed Neon Submit Button */
+        .btn-submit {
+            width: 100%;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 14px;
+            color: #00e5ff;
+            background: rgba(0, 229, 255, 0.1);
+            border: 2px solid #00e5ff;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
+            transition: all 0.25s ease;
+            margin-top: 6px;
+        }
+
+        .btn-submit:hover {
+            background: #00e5ff;
+            color: #030712;
+            border-color: #00ffff;
+            box-shadow: 0 0 28px rgba(0, 229, 255, 0.75);
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Switch Card Link */
+        .auth-footer {
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            letter-spacing: 1px;
+        }
+
+        .auth-footer a {
+            font-family: 'Orbitron', sans-serif;
+            color: #00e5ff;
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 6px;
+            transition: text-shadow 0.2s ease;
+        }
+
+        .auth-footer a:hover {
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
+            color: #ffffff;
+        }
+
+        /* Back to Portal */
+        .back-nav {
+            text-align: center;
+        }
+
+        .back-nav a {
+            font-family: 'Orbitron', sans-serif;
+            color: #00e5ff;
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            opacity: 0.75;
+            transition: opacity 0.2s ease, text-shadow 0.2s ease;
+        }
+
+        .back-nav a:hover {
+            opacity: 1;
+            text-shadow: 0 0 8px rgba(0, 229, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-navbar">
+        <a href="/" class="logo-text" style="text-decoration: none;">KRYPTO</a>
+    </header>
+
+    <main class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1 class="auth-title">ACCESS PORTAL</h1>
+                <div class="auth-subtitle">AUTHENTICATE CREDENTIALS</div>
+            </div>
+
+            <form action="/login" method="POST" class="auth-form">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username or Email</label>
+                    <input type="text" id="username" name="username" class="form-input" placeholder="USERNAME" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password Key</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="PASSWORD" required autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="btn-submit">LOGIN</button>
+            </form>
+
+            <div class="auth-footer">
+                NEW TO PLATFORM? <a href="signup.html">CREATE ACCOUNT</a>
+            </div>
+
+            <div class="back-nav">
+                <a href="index.html">&lt; RETURN TO PORTAL</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

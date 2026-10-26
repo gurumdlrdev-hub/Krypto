@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krypto - Encrypt Multimedia Platform</title>
+
+    <!-- Google Font: Orbitron & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Top Navigation */
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #00e5ff;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            font-family: 'Orbitron', sans-serif;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            padding: 9px 18px;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+        }
+
+        .nav-link:hover {
+            color: #00e5ff;
+            text-shadow: 0 0 8px rgba(0, 229, 255, 0.7);
+        }
+
+        .btn-signup {
+            border: 1px solid #00e5ff;
+            background: rgba(0, 229, 255, 0.08);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+        }
+
+        .btn-signup:hover {
+            background: #00e5ff;
+            color: #030712;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Wrapper */
+        .hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 60px;
+            position: relative;
+            min-height: calc(100vh - 90px);
+        }
+
+        /* Background Visual Layer */
+        .bg-layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 65%;
+            height: 100%;
+            background-image: url('https://res.cloudinary.com/ygllvtyg/image/upload/v1791480661/A_Beginner_s_Guide_to_Encryption_for_Data_Protection_upscayl_2x_upscayl-lite-4x_xeymnh.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            mask-image: linear-gradient(to right, transparent 0%, black 40%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%);
+        }
+
+        /* Dark edge vignettes */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(3, 7, 18, 0.95) 0%, rgba(3, 7, 18, 0.4) 60%, rgba(3, 7, 18, 0.85) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 580px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .brand-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.35);
+        }
+
+        .brand-title span {
+            color: #00e5ff;
+            text-shadow: 0 0 25px rgba(0, 229, 255, 0.7);
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #38bdf8;
+            text-transform: uppercase;
+        }
+
+        .description {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #94a3b8;
+            font-weight: 300;
+            max-width: 480px;
+        }
+
+        /* Action Buttons: Encrypt & Decrypt */
+        .cta-group {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            font-family: 'Orbitron', sans-serif;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 15px 32px;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            text-align: center;
+        }
+
+        /* Encrypt: Solid Bright Accent */
+        .btn-encrypt {
+            background: #ffffff;
+            color: #030712;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+            border: 2px solid #ffffff;
+        }
+
+        .btn-encrypt:hover {
+            background: #00e5ff;
+            border-color: #00e5ff;
+            box-shadow: 0 0 35px rgba(0, 229, 255, 0.8);
+            transform: translateY(-3px);
+        }
+
+        /* Decrypt: Glowing Cyber Outline */
+        .btn-decrypt {
+            background: rgba(10, 15, 30, 0.85);
+            color: #00e5ff;
+            border: 2px solid #00e5ff;
+            box-shadow: 0 0 18px rgba(0, 229, 255, 0.3);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-decrypt:hover {
+            background: rgba(0, 229, 255, 0.15);
+            color: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.7);
+            transform: translateY(-3px);
+        }
+
+        .btn-action:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 20px 24px;
+            }
+
+            .hero {
+                padding: 40px 24px;
+            }
+
+            .bg-layer {
+                width: 100%;
+                opacity: 0.25;
+                mask-image: none;
+                -webkit-mask-image: none;
+            }
+
+            .brand-title {
+                font-size: 42px;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-action {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <a href="/" class="logo">KRYPTO</a>
+        <div class="nav-actions">
+            <a href="/login" class="nav-link">LOGIN</a>
+            <a href="/signup" class="nav-link btn-signup">SIGN UP</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="hero">
+        <div class="bg-layer"></div>
+
+        <div class="hero-content">
+            <h1 class="brand-title">KRY<span>PTO</span></h1>
+            <h2 class="subtitle">Encrypt Multimedia Platform</h2>
+            <p class="description">
+                High-performance cryptographic engine engineered for images, audio tracks, and video streams. Guard your digital assets with advanced stream encryption and zero-knowledge privacy.
+            </p>
+            
+            <!-- Dual Action Buttons -->
+            <div class="cta-group">
+                <a href="/encrypt" class="btn-action btn-encrypt">ENCRYPT</a>
+                <a href="/decrypt" class="btn-action btn-decrypt">DECRYPT</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
