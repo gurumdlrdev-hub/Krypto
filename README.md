@@ -205,7 +205,7 @@ This project helped me learn:
 **Guru Mudhaliyar**
 
 GitHub:
-https://github.com/gurumdlrdev-hub
+https://github.com/gurumdlrdev-hub/Krypto
 
 ---
 
